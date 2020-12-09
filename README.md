@@ -1,5 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/codelighthouse/sdk-node/badge)](https://www.codefactor.io/repository/github/codelighthouse/sdk-node)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/codelighthouse/sdk-node/badge/master)](https://www.codefactor.io/repository/github/codelighthouse/sdk-node/overview/master)
 # CodeLighthouse Node.js SDK
 
 Quick Links |
