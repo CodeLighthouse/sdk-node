@@ -10,12 +10,13 @@ Error.stackTraceLimit = 20;
 
 class CodeLighthouse {
 
-	constructor(organization_name, api_key, environment='prod', resource_group=null, resource_name=null,
+	constructor(organization_name, api_key, default_email, environment='prod', resource_group=null, resource_name=null,
 				github_repo=null) {
 
 		// CONFIGURE PROPERTIES
 		this.organization_name = organization_name;
 		this.api_key = api_key;
+		this.default_email = default_email;			// TO SUPPORT GLOBAL UNCAUGHT EXCEPTIONS
 		this.environment = environment;
 		this.resource_group = resource_group;
 		this.resource_name = resource_name;
