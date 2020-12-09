@@ -12,7 +12,7 @@ Error.stackTraceLimit = 20;
 class CodeLighthouse {
 
 	constructor(organization_name, api_key, default_email, environment='prod', resource_group=null, resource_name=null,
-				github_repo=null) {
+				github_repo=null, enable_global_handler=true) {
 
 		// CONFIGURE PROPERTIES
 		this.organization_name = organization_name;
@@ -22,6 +22,7 @@ class CodeLighthouse {
 		this.resource_group = resource_group;
 		this.resource_name = resource_name;
 		this.github_repo = github_repo;
+		this.enable_global_handler = enable_global_handler;
 
 		// SET UP WEB CLIENT
 		let url, debug;
@@ -41,12 +42,15 @@ class CodeLighthouse {
 		this.web_client = new WebClient(this.organization_name, this.api_key, url, 'v1', debug);
 
 		// SET UP UNHANDLED EXCEPTION AND UNCAUGHT PROMISE REJECTION ERRORS
-		process.on("uncaughtException", err => {
-			this.error(err, this.default_email);
-		});
-		process.on("unhandledRejection", err => {
-			this.error(err, this.default_email);
-		});
+		if (this.enable_global_handler) {
+			process.on("uncaughtException", err => {
+				this.error(err, this.default_email);
+			});
+			process.on("unhandledRejection", err => {
+				this.error(err, this.default_email);
+			});
+		}
+
 
 		// SET UP INTEGRATIONS
 		// NOTE: INTEGRATION FUNCTIONS MUST BE ARROW FUNCTIONS OR ELSE THE THIS POINTER WILL NOT WORK
@@ -62,9 +66,6 @@ class CodeLighthouse {
 				}
 			}
 		}
-
-
-
 	}
 
 	// SEND THE ERROR TO OUR BACKEND
