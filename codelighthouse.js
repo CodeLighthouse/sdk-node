@@ -38,6 +38,13 @@ class CodeLighthouse {
 
 		this.web_client = new WebClient(this.organization_name, this.api_key, url, 'v1', debug);
 
+		// SET UP UNHANDLED EXCEPTION AND UNCAUGHT PROMISE REJECTION ERRORS
+		process.on("uncaughtException", err => {
+			this.error(err, this.default_email);
+		});
+		process.on("unhandledRejection", err => {
+			this.error(err, this.default_email);
+		});
 
 	}
 
