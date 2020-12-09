@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/CodeLighthouse/sdk-node/issues"
   },
-  "homepage": "https://github.com/CodeLighthouse/sdk-node#readme",
+  "homepage": "https://codelighthouse.io",
   "dependencies": {
     "axios": "^0.21.0",
     "stacktrace-parser": "^0.1.10"
