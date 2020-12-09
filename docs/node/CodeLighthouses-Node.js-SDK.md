@@ -8,7 +8,7 @@ Welcome to CodeLighthouse's official documentation for our Node.js SDK! If you'r
 install, configure, and/or integrate our SDK into your code, you're in the right place! 
 
 ## Installing the SDK
-The CodeLighthouse SDK is published on [npm](https://pypi.org/project/CodeLighthouse/), the Node.js package manager. 
+The CodeLighthouse SDK is published on [npm](https://npmjs.org/package/codelighthouse), the Node.js package manager. 
 
 ### Installing with npm
 Installing the SDK with npm couldn't be easier! 
