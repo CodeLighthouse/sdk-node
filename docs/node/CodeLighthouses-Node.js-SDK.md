@@ -55,7 +55,7 @@ SDK to prevent typos.
 * `default_email` - The email address of the user in your CodeLighthouse organization who is responsible for the resource. All notifications for uncaught errors will be sent to this user. You can view and invite users to your organization in the [user management page](https://codelighthouse.io/admin/users) on your admin panel. 
 
 
-#### Optional Options
+#### Optional Parameters
 The following options are used for organizing your resources and their errors. The specified values for each will be 
 included in your error notifications. When a function in a resource encounters an error, the code owner will be 
 notified of the resource group, resource name, environment, and function name where the error ocurred. We anticipate 
