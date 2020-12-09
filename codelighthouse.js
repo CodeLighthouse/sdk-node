@@ -3,6 +3,7 @@
 // IMPORTS
 const WebClient = require('./lib/webclient');
 const CodeLighthouseError = require('./lib/codelighthouse_error');
+const domain = require('domain');
 
 // SET THE ERROR STACK TRACE LIMIT TO 20 FRAMES
 Error.stackTraceLimit = 20;
@@ -47,21 +48,37 @@ class CodeLighthouse {
 			this.error(err, this.default_email);
 		});
 
+		// SET UP INTEGRATIONS
+		// NOTE: INTEGRATION FUNCTIONS MUST BE ARROW FUNCTIONS OR ELSE THE THIS POINTER WILL NOT WORK
+		this.integrations = {
+			express: {
+				requestHandler: (request, response, next) => {
+					const dom = domain.create();
+					dom.on('error', next);
+					return dom.run(next);
+				},
+				errorHandler: (error, request, response, next) => {
+					this.error(error);
+				}
+			}
+		}
+
+
+
 	}
 
-	error(error, email) {
+	// SEND THE ERROR TO OUR BACKEND
+	error(error, email=this.default_email, extra_data = {}) {
 
 		// CONSTRUCT AN ERROR
 		const clh_error = new CodeLighthouseError(error, email, this.resource_group, this.resource_name,
 			this.github_repo);
 
-		console.log(clh_error.json())
-
 		// SEND THE ERROR
 		this.web_client.send_error(clh_error.json());
 
-
 	}
+
 
 
 }
