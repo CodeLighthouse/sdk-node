@@ -1,0 +1,30 @@
+{
+  "name": "codelighthouse",
+  "version": "1.0.0",
+  "description": "CodeLighthouse's Node.js SDK. For more information on CodeLighthouse, check out codelighthouse.io!",
+  "main": "codelighthouse.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeLighthouse/sdk-node.git"
+  },
+  "keywords": [
+    "node",
+    "error",
+    "handling",
+    "exception",
+    "error handling"
+  ],
+  "author": "codelighthouse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeLighthouse/sdk-node/issues"
+  },
+  "homepage": "https://github.com/CodeLighthouse/sdk-node#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "stacktrace-parser": "^0.1.10"
+  }
+}
