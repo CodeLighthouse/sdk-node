@@ -128,7 +128,7 @@ app.use(codelighthouse.integrations.express.requestHandler);
 
 // YOUR ROUTES AND MIDDLEWARE HERE
 app.route("/", (request, response, next) => {
-  // COD EHERE
+  // CODE HERE
 });
 
 // NOTE: THIS NEEDS TO GO AFTER YOUR ROUTES, AND BEFORE OTHER ERROR HANDLERS
