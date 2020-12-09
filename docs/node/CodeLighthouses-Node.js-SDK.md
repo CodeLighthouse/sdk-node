@@ -39,10 +39,10 @@ extensibility.
 |`default_email`          | The email address of the user who owns the service \*| yes |
 |`resource_name`          |The name of the resource you are embedding the SDK into| no|
 |`resource_group`         |The group of resources that the resource you are embedding the SDK into belongs to| no |
-|`enable_global_handler`| Toggles whether uncaught errors should be reported to the user specified by `default_email`|no
+|`enable_global_handler`| Toggles whether uncaught errors should be reported to the user specified by `default_email`. Default: `true`|no
 \* More on this later
 
-#### Mandatory Options
+#### Required Parameters
 These options are required for your SDK to successfully authenticate to our server and to function properly.
 * `organization_name`  - The name of your organization. After you sign up, this can be found in your 
 [CodeLighthouse Admin Dashboard](https://codelighthouse.io/admin) on the 
