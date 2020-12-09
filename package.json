@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "CodeLighthouse's Node.js SDK. For more information on CodeLighthouse, check out codelighthouse.io!",
   "main": "codelighthouse.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeLighthouse/sdk-node.git"
