@@ -1,6 +1,6 @@
 {
   "name": "codelighthouse",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CodeLighthouse's Node.js SDK. For more information on CodeLighthouse, check out codelighthouse.io!",
   "main": "codelighthouse.js",
   "scripts": {},
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/CodeLighthouse/sdk-node/issues"
   },
-  "homepage": "https://github.com/CodeLighthouse/sdk-node#readme",
+  "homepage": "https://codelighthouse.io",
   "dependencies": {
     "axios": "^0.21.0",
     "stacktrace-parser": "^0.1.10"

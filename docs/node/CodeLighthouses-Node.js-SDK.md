@@ -8,7 +8,7 @@ Welcome to CodeLighthouse's official documentation for our Node.js SDK! If you'r
 install, configure, and/or integrate our SDK into your code, you're in the right place! 
 
 ## Installing the SDK
-The CodeLighthouse SDK is published on [npm](https://pypi.org/project/CodeLighthouse/), the Node.js package manager. 
+The CodeLighthouse SDK is published on [npm](https://npmjs.org/package/codelighthouse), the Node.js package manager. 
 
 ### Installing with npm
 Installing the SDK with npm couldn't be easier! 
@@ -39,10 +39,10 @@ extensibility.
 |`default_email`          | The email address of the user who owns the service \*| yes |
 |`resource_name`          |The name of the resource you are embedding the SDK into| no|
 |`resource_group`         |The group of resources that the resource you are embedding the SDK into belongs to| no |
-|`enable_global_handler`| Toggles whether uncaught errors should be reported to the user specified by `default_email`|no
+|`enable_global_handler`| Toggles whether uncaught errors should be reported to the user specified by `default_email`. Default: `true`|no
 \* More on this later
 
-#### Mandatory Options
+#### Required Parameters
 These options are required for your SDK to successfully authenticate to our server and to function properly.
 * `organization_name`  - The name of your organization. After you sign up, this can be found in your 
 [CodeLighthouse Admin Dashboard](https://codelighthouse.io/admin) on the 
@@ -55,7 +55,7 @@ SDK to prevent typos.
 * `default_email` - The email address of the user in your CodeLighthouse organization who is responsible for the resource. All notifications for uncaught errors will be sent to this user. You can view and invite users to your organization in the [user management page](https://codelighthouse.io/admin/users) on your admin panel. 
 
 
-#### Optional Options
+#### Optional Parameters
 The following options are used for organizing your resources and their errors. The specified values for each will be 
 included in your error notifications. When a function in a resource encounters an error, the code owner will be 
 notified of the resource group, resource name, environment, and function name where the error ocurred. We anticipate 
@@ -128,7 +128,7 @@ app.use(codelighthouse.integrations.express.requestHandler);
 
 // YOUR ROUTES AND MIDDLEWARE HERE
 app.route("/", (request, response, next) => {
-  // COD EHERE
+  // CODE HERE
 });
 
 // NOTE: THIS NEEDS TO GO AFTER YOUR ROUTES, AND BEFORE OTHER ERROR HANDLERS
