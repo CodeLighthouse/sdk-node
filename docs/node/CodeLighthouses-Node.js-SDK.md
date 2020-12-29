@@ -89,7 +89,7 @@ const codelighthouse = new CodeLighthouse(
 Once you have configured the SDK, you have a few options on how to use it. 
 
 ### The Global Handler
-By default, the CodeLighthouse SDK will send error notifications for all uncaught exceptions and uncaught promise rejections to the user specified by `default_email` in the configuration. To turn this off, set the parameter `enable_global_handler` to `true`.
+By default, the CodeLighthouse SDK will send error notifications for all uncaught exceptions and uncaught promise rejections to the user specified by `default_email` in the configuration. To turn this off, set the parameter `enable_global_handler` to `false`.
 
 **Note that frameworks such as Express.js may handle errors that occur in routes, such that application errors will not be caught by the global handler.** Please see the section on our Express.js integration for information on how to catch errors within routes. Looking for a different framework? [Contact us](https://codelighthouse.io/contact).
 
