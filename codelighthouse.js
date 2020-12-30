@@ -69,11 +69,11 @@ class CodeLighthouse {
 	}
 
 	// SEND THE ERROR TO OUR BACKEND
-	error(error, email=this.default_email, extra_data = {}) {
+	error(error, email=this.default_email, data=null) {
 
 		// CONSTRUCT AN ERROR
 		const clh_error = new CodeLighthouseError(error, email, this.resource_group, this.resource_name,
-			this.github_repo);
+			this.github_repo, data);
 
 		// SEND THE ERROR
 		this.web_client.send_error(clh_error.json());
