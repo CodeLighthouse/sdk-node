@@ -1,6 +1,6 @@
 {
   "name": "codelighthouse",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "CodeLighthouse's Node.js SDK. For more information on CodeLighthouse, check out codelighthouse.io!",
   "main": "codelighthouse.js",
   "scripts": {},

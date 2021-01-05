@@ -79,7 +79,7 @@ const CodeLighthouse = require('codelighthouse');
 const codelighthouse = new CodeLighthouse(
     organization_name="CodeLighthouse, LLC",
     api_key="your API Key",
-    default_email="code owner's email address"
+    default_email="code owner's email address",
     resource_group="serverless-applications",
     resource_name="notifications-app"
 )
@@ -89,7 +89,7 @@ const codelighthouse = new CodeLighthouse(
 Once you have configured the SDK, you have a few options on how to use it. 
 
 ### The Global Handler
-By default, the CodeLighthouse SDK will send error notifications for all uncaught exceptions and uncaught promise rejections to the user specified by `default_email` in the configuration. To turn this off, set the parameter `enable_global_handler` to `true`.
+By default, the CodeLighthouse SDK will send error notifications for all uncaught exceptions and uncaught promise rejections to the user specified by `default_email` in the configuration. To turn this off, set the parameter `enable_global_handler` to `false`.
 
 **Note that frameworks such as Express.js may handle errors that occur in routes, such that application errors will not be caught by the global handler.** Please see the section on our Express.js integration for information on how to catch errors within routes. Looking for a different framework? [Contact us](https://codelighthouse.io/contact).
 
@@ -116,6 +116,24 @@ catch (err) {
   codelighthouse.error(err, "an_email@your_company.com");
 }
 ```
+
+When you're sending errors manually using this method, you can also optionally attach additional data that will show
+up in the admin panel in the error view. The most common use case for this is including additional information that will
+help your developers to identify and debug the error. For example, you could attach information about the currently
+logged-in user that experienced the error, connection information, or other application state information.
+
+```javascript
+try {
+  // YOUR CODE HERE
+}
+catch (err) {
+  codelighthouse.error(err, "an_email@your_company.com", data=some_data);
+}
+```
+
+Make sure that the data you're passing via the `data` argument can be serialized into JSON. Object literals and native 
+types will work easily, but if you choose to pass a more complicated object, ensure that it is serializable to JSON and 
+that it does not contain any circular references. 
 
 ### Express.js Integration
 While Express.js has the potential to distrupt some SDK functionalities as described above, it also presented an opportunity for integration. The SDK currently has two methods that allow for integration into Express:
@@ -160,7 +178,7 @@ const CodeLighthouse = require('codelighthouse');
 const codelighthouse = new CodeLighthouse(
     organization_name="CodeLighthouse, LLC",
     api_key="your API Key",
-    default_email="doesnotexist@codelighthouse.io" 
+    default_email="doesnotexist@codelighthouse.io",
     resource_group="serverless-applications",
     resource_name="notifications-app"
 )
@@ -209,7 +227,7 @@ const CodeLighthouse = require('codelighthouse');
 const codelighthouse = new CodeLighthouse(
     organization_name="CodeLighthouse, LLC",
     api_key="your API Key",
-    default_email="doesnotexist@codelighthouse.io" 
+    default_email="doesnotexist@codelighthouse.io",
     resource_group="serverless-applications",
     resource_name="notifications-app"
 )
