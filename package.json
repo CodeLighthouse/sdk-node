@@ -22,7 +22,7 @@
   },
   "homepage": "https://codelighthouse.io",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "stacktrace-parser": "^0.1.10"
   }
 }
