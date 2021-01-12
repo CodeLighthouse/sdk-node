@@ -37,9 +37,6 @@ class CodeLighthouse {
 			url = 'https://codelighthouse.io';
 			debug = false;
 		}
-		console.log(this.environment)
-		console.log(url);
-		console.log(this);
 
 		this.web_client = new WebClient(this.organization_name, this.api_key, url, 'v1', debug);
 
