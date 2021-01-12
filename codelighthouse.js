@@ -10,19 +10,18 @@ Error.stackTraceLimit = 20;
 
 
 class CodeLighthouse {
-
-	constructor(organization_name, api_key, default_email, environment='prod', resource_group=null, resource_name=null,
-				github_repo=null, enable_global_handler=true) {
+	constructor(organization_name, api_key, default_email, options={}) {
 
 		// CONFIGURE PROPERTIES
 		this.organization_name = organization_name;
 		this.api_key = api_key;
 		this.default_email = default_email;			// TO SUPPORT GLOBAL UNCAUGHT EXCEPTIONS
-		this.environment = environment;
-		this.resource_group = resource_group;
-		this.resource_name = resource_name;
-		this.github_repo = github_repo;
-		this.enable_global_handler = enable_global_handler;
+
+		this.environment = options.environment ? options.environment : 'prod';
+		this.resource_group = options.resource_group ? options.resource_group : null;
+		this.resource_name = options.resource_name ? options.resource_name : null;
+		this.github_repo = options.github_repo ? options.github_repo : null;
+		this.enable_global_handler = options.enable_global_handler ? options.enable_global_handler : true;
 
 		// SET UP WEB CLIENT
 		let url, debug;
@@ -38,6 +37,9 @@ class CodeLighthouse {
 			url = 'https://codelighthouse.io';
 			debug = false;
 		}
+		console.log(this.environment)
+		console.log(url);
+		console.log(this);
 
 		this.web_client = new WebClient(this.organization_name, this.api_key, url, 'v1', debug);
 
