@@ -37,9 +37,7 @@ extensibility.
 |`organization_name`      |The name of your organization when you signed up| yes       |
 |`api_key`              |Your organization's API Key                     | yes       |
 |`default_email`          | The email address of the user who owns the service \*| yes |
-|`resource_name`          |The name of the resource you are embedding the SDK into| no|
-|`resource_group`         |The group of resources that the resource you are embedding the SDK into belongs to| no |
-|`enable_global_handler`| Toggles whether uncaught errors should be reported to the user specified by `default_email`. Default: `true`|no
+|`options`                 | An object containing additional options described below | no |
 \* More on this later
 
 #### Required Parameters
@@ -56,16 +54,18 @@ SDK to prevent typos.
 
 
 #### Optional Parameters
+These values should be used as keys in the `options` object that is passed to the CodeLighthouse constructor.
+
 The following options are used for organizing your resources and their errors. The specified values for each will be 
 included in your error notifications. When a function in a resource encounters an error, the code owner will be 
-notified of the resource group, resource name, environment, and function name where the error ocurred. We anticipate 
+notified of the resource group, resource name, environment, and function name where the error occurred. We anticipate 
 being able to filter errors and visualizations on the basis of these options in the near future.
 
 * `resource_name` - The name of the resource that your code belongs to. This is used for tracking errors when you are 
 using CodeLighthouse in multiple different projects or resources. This value is included in the error notifications you 
 receive so that you know where the error ocurred. We also anticipate allowing you to filter your error feed by resource 
 name, as well as offering error analytics and visualizations on a per-resource basis in the near future. 
-* `resource group` - the name of the group or resources that this resource belongs to. Similar to `resource_name`, this 
+* `resource_group` - the name of the group or resources that this resource belongs to. Similar to `resource_name`, this 
 is used for tracking errorss, and is included in the error notifications you receive. We expect to be able to allow you 
 to filter and visualize errors on a per-`resource_group` basis as well. 
 * `enable_global_handler` - Toggles whether all uncaught errors should be reported to the email specified by `default_email`.
@@ -77,11 +77,13 @@ const CodeLighthouse = require('codelighthouse');
 
 // INSTANTIATE THE ERROR CATCHER
 const codelighthouse = new CodeLighthouse(
-    organization_name="CodeLighthouse, LLC",
-    api_key="your API Key",
-    default_email="code owner's email address",
-    resource_group="serverless-applications",
-    resource_name="notifications-app"
+    "CodeLighthouse, LLC",          // ORGANIZATION NAME
+    "your API Key",                 // API KEY
+    "code owner's email address",   // DEFAULT EMAIL
+    {                               // ADDITIONAL OPTIONS
+		resource_group: "serverless-applications",
+		resource_name: "notifications-app"
+    }
 )
 ```
 
@@ -116,6 +118,8 @@ catch (err) {
   codelighthouse.error(err, "an_email@your_company.com");
 }
 ```
+
+The email that you specify must belong to a user that has been added to your CodeLighthouse organization, or else the notification will not be sent.
 
 When you're sending errors manually using this method, you can also optionally attach additional data that will show
 up in the admin panel in the error view. The most common use case for this is including additional information that will
@@ -176,11 +180,13 @@ const CodeLighthouse = require('codelighthouse');
 
 // CONFIGURE THE SDK, SENDING UNCAUGHT EXCEPTIONS AND PROMISE REJECTIONS TO doesnotexist@codelighthouse.io
 const codelighthouse = new CodeLighthouse(
-    organization_name="CodeLighthouse, LLC",
-    api_key="your API Key",
-    default_email="doesnotexist@codelighthouse.io",
-    resource_group="serverless-applications",
-    resource_name="notifications-app"
+	"CodeLighthouse, LLC",              // ORGANIZATION NAME
+	"your API Key",                     // API KEY
+	"doesnotexist@codelighthouse.io",   // DEFAULT EMAIL
+	{                                   // ADDITIONAL OPTIONS
+		resource_group: "serverless-applications",
+		resource_name: "notifications-app"
+	}
 )
 
 // HANDLER
@@ -225,11 +231,13 @@ const CodeLighthouse = require('codelighthouse');
 
 // CONFIGURE THE SDK, SENDING UNCAUGHT EXCEPTIONS AND PROMISE REJECTIONS TO doesnotexist@codelighthouse.io
 const codelighthouse = new CodeLighthouse(
-    organization_name="CodeLighthouse, LLC",
-    api_key="your API Key",
-    default_email="doesnotexist@codelighthouse.io",
-    resource_group="serverless-applications",
-    resource_name="notifications-app"
+	"CodeLighthouse, LLC",              // ORGANIZATION NAME
+	"your API Key",                     // API KEY
+	"doesnotexist@codelighthouse.io",   // DEFAULT EMAIL
+	{                                   // ADDITIONAL OPTIONS
+		resource_group: "serverless-applications",
+		resource_name: "notifications-app"
+	}
 )
 
 var app = express();
