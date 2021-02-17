@@ -10,7 +10,7 @@ Error.stackTraceLimit = 20;
 
 
 class CodeLighthouse {
-	constructor(organization_name, api_key, default_email, options={}) {
+	constructor(organization_name, api_key, default_email, options = {}) {
 
 		// CONFIGURE PROPERTIES
 		this.organization_name = organization_name;
@@ -28,12 +28,10 @@ class CodeLighthouse {
 		if (this.environment === "local") {
 			url = 'http://localhost:5000';
 			debug = true;
-		}
-		else if (this.environment === 'dev') {
+		} else if (this.environment === 'dev') {
 			url = 'https://dev.codelighthouse.io';
 			debug = true;
-		}
-		else {
+		} else {
 			url = 'https://codelighthouse.io';
 			debug = false;
 		}
@@ -49,26 +47,10 @@ class CodeLighthouse {
 				this.error(err, this.default_email);
 			});
 		}
-
-
-		// SET UP INTEGRATIONS
-		// NOTE: INTEGRATION FUNCTIONS MUST BE ARROW FUNCTIONS OR ELSE THE THIS POINTER WILL NOT WORK
-		this.integrations = {
-			express: {
-				requestHandler: (request, response, next) => {
-					const dom = domain.create();
-					dom.on('error', next);
-					return dom.run(next);
-				},
-				errorHandler: (error, request, response, next) => {
-					this.error(error);
-				}
-			}
-		}
 	}
 
 	// SEND THE ERROR TO OUR BACKEND
-	error(error, email=this.default_email, data=null) {
+	error(error, email = this.default_email, data = null) {
 
 		// CONSTRUCT AN ERROR
 		const clh_error = new CodeLighthouseError(error, email, this.resource_group, this.resource_name,
@@ -80,8 +62,44 @@ class CodeLighthouse {
 	}
 
 
+}
 
+let clh_instance = null;
+
+// FUNCTION TO CONFIGURE THE MODULE
+function configure(organization, api_key, default_email, options = {}) {
+	clh_instance = new CodeLighthouse(organization, api_key, default_email, options);
+}
+
+// FUNCTION TO MANUALLY REPORT ERRORS
+function error(error, config = {}) {
+	if (!clh_instance) {
+		throw new Error("You have not configured the CodeLighthouse module yet!");
+	} else {
+		let email = config.email || clh_instance.default_email;
+		let data = config.data || null;
+
+		return clh_instance.error(error, email, data);
+	}
+}
+
+// INTEGRATIONS
+const integrations = {
+	express: {
+		requestHandler: (request, response, next) => {
+			const dom = domain.create();
+			dom.on('error', next);
+			return dom.run(next);
+		},
+		errorHandler: (error, request, response, next) => {
+			clh_instance.error(error);
+		}
+	}
 }
 
 // EXPORT THE CODELIGHTHOUSE CLASS
-module.exports = CodeLighthouse
+module.exports = {
+	configure,
+	error,
+	integrations
+}
